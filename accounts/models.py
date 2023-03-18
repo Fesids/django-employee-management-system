@@ -35,7 +35,7 @@ class CustomUserModel(AbstractUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["email",]
+    REQUIRED_FIELDS = ["username",]
 
     def __str__(self):
         return self.email
