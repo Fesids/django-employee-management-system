@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractUser, PermissionsMixin
+from employee_profile.models import Employee_profile
 
 # Create your models here.
 
@@ -15,6 +16,8 @@ class UserManager(BaseUserManager):
             user.set_password(password)
             user.save()
 
+            Employee_profile.objects.create(user=user, first_name='', last_name='', phone='', city='')
+
             return user
 
     def create_superuser(self, email, username, password):
@@ -25,6 +28,8 @@ class UserManager(BaseUserManager):
             user = self.create_user(email=email, username=username, password=password)
             user.is_staff = True
             user.is_superuser = True
+
+            Employee_profile.objects.create(user=user, first_name='', last_name='', phone='', city='')
             user.save()
 
 class CustomUserModel(AbstractUser, PermissionsMixin):
