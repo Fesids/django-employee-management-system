@@ -11,6 +11,7 @@ urlpatterns = [
     path("", HomePage.as_view(), name="home"),
 
     # api
-    path('api/', include("api.urls"))
+    path('api/', include("api.urls")),
+    path("", include("rest_framework.urls"))
 
 ]

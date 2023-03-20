@@ -2,6 +2,15 @@ from django.db import models
 from django.conf import settings
 # Create your models here.
 
+class Department(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+
+    class Meta:
+        ordering =['name']
+
+    def __str__(self):
+        return self.name
 class Employee_profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user",
                              on_delete=models.CASCADE)
