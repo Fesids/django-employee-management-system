@@ -6,6 +6,13 @@
 {% block content %}
     <div class="container border mt-2">
         <h1 class="mt-2 mb-2">Login</h1>
+
+        {% if form.errors %}
+            <p class="danger">Your credentials don't match.Please, try again</p>
+        {% else %}
+            <p>Please, use the following form to log-in</p>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

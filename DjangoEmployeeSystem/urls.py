@@ -9,6 +9,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/", include("accounts.urls")),
     path("", HomePage.as_view(), name="home"),
+    path("employee_profile/", include("employee_profile.urls")),
 
     # api
     path('api/', include("api.urls")),

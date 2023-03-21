@@ -29,8 +29,9 @@ class UserManager(BaseUserManager):
             user.is_staff = True
             user.is_superuser = True
 
-            Employee_profile.objects.create(user=user, first_name='', last_name='', phone='', city='')
+
             user.save()
+            Employee_profile.objects.create(user=user)
 
 class CustomUserModel(AbstractUser, PermissionsMixin):
     email = models.CharField(max_length=244, unique=True)
