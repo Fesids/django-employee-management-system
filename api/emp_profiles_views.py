@@ -12,8 +12,11 @@ class EmployeeProfilesAll(APIView):
 
     def get(self, request, *args, **kwargs):
         serializer = self.serializer_class
-        emp_profiles = self.queryset()
+        emp_profiles = self.queryset.all()
 
         return Response({"status": "success", "profiles": serializer(emp_profiles, many=True).data},
                         status=status)
 
+class EmployeeProfileListApi(generics.ListAPIView):
+    serializer_class = EmployeeProfileSerializer
+    queryset = Employee_profile.objects.all()

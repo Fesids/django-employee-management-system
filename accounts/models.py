@@ -6,6 +6,11 @@ from employee_profile.models import Employee_profile
 
 class UserManager(BaseUserManager):
 
+    def create(self, user):
+        emp_profile = Employee_profile(user)
+        emp_profile.save()
+
+        return emp_profile
     def create_user(self, username, email, password=None):
         if not email:
             raise ValueError("A user must have and email")
@@ -29,9 +34,11 @@ class UserManager(BaseUserManager):
             user.is_staff = True
             user.is_superuser = True
 
-
             user.save()
-            Employee_profile.objects.create(user=user)
+
+            self.create(user)
+            return user
+
 
 class CustomUserModel(AbstractUser, PermissionsMixin):
     email = models.CharField(max_length=244, unique=True)
@@ -45,3 +52,4 @@ class CustomUserModel(AbstractUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+

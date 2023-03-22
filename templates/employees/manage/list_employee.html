@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Employee list</h1>
+    <a href="{% url 'employee_create' %}">+ add employee</a>
+    <div class="employee_profile">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in object_list %}
+                    <tr>
+                        <td>{{emp.first_name}}</td>
+                        <td>{{emp.last_name}}</td>
+                        <td>
+                            <a href="{% url 'employee_update' emp.pk %}" class="btn btn-primary">update</a>
+                            <a class="btn btn-danger">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+{% endblock content %}
