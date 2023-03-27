@@ -2,6 +2,10 @@
 
 from pathlib import Path
 import os
+from datetime import timedelta
+
+import corsheaders.middleware
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,6 +35,10 @@ INSTALLED_APPS = [
     # 3rd party apps
     'rest_framework',
     'crispy_forms',
+    'corsheaders',
+    'rest_framework_simplejwt',
+    'drf_spectacular',
+    
 
     # local apps
     'accounts.apps.AccountsConfig',
@@ -42,18 +50,36 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
 
     "DEFAULT_PERMISSION_CLASSES": (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'rest_framework.authentication.SessionAuthentication',
-    )
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ),
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Employee System API",
+    "DESCRIPTION": "A sample employee system to get a job (* pfvr, me emprega, eu sou baum )",
+    "VERSION": "1.0.0"
+}
+
+
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,6 +87,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000",
+    "http://localhost:8000",
+)
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://localhost:5173"
+]
 # CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 

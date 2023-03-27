@@ -6,6 +6,11 @@
   <div class="container  mt-5 border">
       <h2>Homepage</h2>
       <p>Welcome to employee management system.</p>
-      <a href="{% url 'employee_list' %}">list employee</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'employee_list' %}">list employee</a>
+      {% else %}
+        <p>log in to access employee list</p>
+      {% endif %}
+
   </div>
 {% endblock content %}

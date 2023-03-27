@@ -17,3 +17,16 @@ class EmployeeProfilesAll(APIView):
         return Response({"status": "success", "profiles": serializer(emp_profiles, many=True).data},
                         status=status)
 
+
+class EmployeeProfileDetail(APIView):
+    queryset = Employee_profile.objects.all()
+    serializer_class = EmployeeProfileSerializer
+    post = None
+    def dispatch(self, request, *args, **kwargs):
+        id = self.kwargs.get('id')
+        self.post = Employee_profile.objects.filter(id=id)
+
+    def get(self, request, *args, **kwargs):
+        serializer = self.serializer_class
+
+        return Response({"status": "success", "post":serializer(self.post, many=True).data}, status=status.HTTP_200_OK)
