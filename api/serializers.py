@@ -10,6 +10,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
@@ -20,3 +21,5 @@ class EmployeeProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee_profile
         fields = '__all__'
+
+

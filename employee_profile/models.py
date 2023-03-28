@@ -13,7 +13,7 @@ class Department(models.Model):
         return self.name
 class Employee_profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="user",
-                             on_delete=models.CASCADE, unique=True, null=True)
+                             on_delete=models.CASCADE, null=True)
     first_name = models.CharField(max_length=255, default='')
     last_name = models.CharField(max_length=255, default='')
     phone = models.CharField(max_length=25, default='')

@@ -2,10 +2,19 @@
 
 
 {% block content %}
-    <h1>Employee {{ employee.first_name}}</h1>
 
-    <div class="container">
-        <h2>name : {{ employee.first_name }} {{ employee.last_name }}</h2>
-        <p>email: {{ employee.email }}</p>
+    <div class="container mt-2 mb-2">
+        <h1 class="mt-2">Employee {{ employee.first_name}} details</h1>
+
+        <div class="border">
+            <p>name : {{ employee.first_name }} {{ employee.last_name }}</p>
+            <p>department : {{ employee.department }}</p>
+            <p>phone : {{ employee.phone }}</p>
+            <p>city : {{ employee.city }}</p>
+            <p>created : {{ employee.created }} </p>
+
+            <a href="{% url 'employee_list' %}"><- back to employee list</a>
+        </div>
+
     </div>
 {% endblock %}

@@ -12,7 +12,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 class EmployeeProfileAdmin(admin.ModelAdmin):
     search_fields = ['first_name', 'last_name', 'city']
     list_display = ['first_name', 'last_name', 'city', 'phone','created', 'updated']
-    list_filter = ['created', 'updated', 'department']
+    list_filter = ['created', 'updated']
 
 
 

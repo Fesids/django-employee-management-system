@@ -6,11 +6,11 @@ from employee_profile.models import Employee_profile
 
 class UserManager(BaseUserManager):
 
-    def create(self, user):
+    '''def create(self, user):
         emp_profile = Employee_profile(user)
-        emp_profile.save()
+        emp_profile.save()'
 
-        return emp_profile
+        return emp_profile'''
     def create_user(self, username, email, password=None):
         if not email:
             raise ValueError("A user must have and email")
@@ -21,7 +21,6 @@ class UserManager(BaseUserManager):
             user.set_password(password)
             user.save()
 
-            Employee_profile.objects.create(user=user, first_name='', last_name='', phone='', city='')
 
             return user
 
@@ -36,7 +35,7 @@ class UserManager(BaseUserManager):
 
             user.save()
 
-            self.create(user)
+
             return user
 
 

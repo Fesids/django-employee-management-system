@@ -18,7 +18,7 @@ class GenericMixin:
 
 class EmployeeProfileMixin(generic.View):
     model = Employee_profile
-    fields = ['user', 'first_name','last_name', 'phone', 'city', 'department']
+    fields = ['user', 'first_name','last_name', 'phone', 'city']
     success_url = reverse_lazy('employee_list')
 
 

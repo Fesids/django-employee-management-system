@@ -7,6 +7,7 @@
       <h2>Homepage</h2>
       <p>Welcome to employee management system.</p>
       {% if user.is_authenticated %}
+        <p>welcome {{ user.username }}</p>
         <a href="{% url 'employee_list' %}">list employee</a>
       {% else %}
         <p>log in to access employee list</p>

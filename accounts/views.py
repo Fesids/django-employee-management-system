@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 from django.views.generic.base import TemplateResponseMixin, View
 from employee_profile.models import Employee_profile
 from api.serializers import EmployeeProfileSerializer
+from employee_profile.forms import CreateEmployeeForm
 from .models import CustomUserModel
 # Create your views here.
 
@@ -20,10 +21,13 @@ class HomePage(generic.TemplateView):
 
 class SignUp(TemplateResponseMixin, View):
     template_name = "registration/signup.html"
+    user = None
 
     def get_formset(self, data=None):
 
         return CustomUserCreationForm(data=data)
+
+
     def get(self, request, format=None):
         form = self.get_formset()
         return self.render_to_response({
@@ -34,20 +38,20 @@ class SignUp(TemplateResponseMixin, View):
     def post(self, request, format=None):
         form = self.get_formset(data=request.POST)
 
-        if form.is_valid():
-            form.save()
+        '''data_emp = {
+            "user": CustomUserModel.objects.last(),
+            "first_name": "",
+            "last_name": "",
+            "phone": "",
+            "city": "",
+            "department": None
+        }
 
-            data_emp = {
-                "user": request.POST,
-                "first_name": "",
-                "last_name": "",
-                "phone": "",
-                "city": "",
-                "department": None
-            }
-            emp = EmployeeProfileSerializer(data=data_emp)
-            if emp.is_valid():
-                emp.save()
+        form_emp = self.get_formset_employee(data=data_emp)'''
+
+        if form.is_valid():
+            user = form.save()
+            # employee = Employee_profile.objects.create(user=user)
 
 
             return redirect("login")

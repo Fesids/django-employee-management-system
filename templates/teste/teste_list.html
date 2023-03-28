@@ -1,6 +1,10 @@
 
 
 {% block content %}
+
+    {% if empty %}
+        <p>No employees register yet.</p>
+    {% endif %}
     {% for emp in employees %}
         <h2>{{ emp.first_name }}</h2>
     {% endfor %}
